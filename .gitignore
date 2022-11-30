@@ -1,0 +1,9 @@
+.DS_Store
+
+kaggle.json
+
+**/.ipynb_checkpoints
+
+# 용량이 큰 데이터셋까지 푸쉬하지 않음
+Data
+*.zip
