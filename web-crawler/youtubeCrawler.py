@@ -41,13 +41,16 @@ def YouTube_music(result):
     search = wd.find_element(By.NAME, "search_query")
     time.sleep(2)
     search.send_keys(keyword)
-    search.send_keys(Keys.ENTER)
+    #search.send_keys(Keys.ENTER)
+
+    btnSearch = wd.find_element(By.ID, 'search-icon-legacy')
+    btnSearch.click()
+
     print(keyword + "검색")
     
     html = wd.page_source
     soupYM = BeautifulSoup(html,'html.parser')
-
-
+    
     try:        
         # 페이지 내 스크롤 높이 받아오기
         last_page_height = wd.execute_script("return document.documentElement.scrollHeight")
@@ -67,7 +70,6 @@ def YouTube_music(result):
             # 스크롤을 완료한 경우(더이상 페이지 높이 변화가 없는 경우 && result.length == 50)
             if new_page_height == last_page_height:
                 print("스크롤 완료")
-                print(result)
                 break
             # 스크롤 완료하지 않은 경우, 최하단까지 스크롤
             else:
@@ -75,7 +77,7 @@ def YouTube_music(result):
     except Exception as e:
         print("에러 발생: ", e)
                 
-
+    s
     
 
     return
