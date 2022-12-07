@@ -15,42 +15,22 @@ import urllib.request
 import pandas as pd
 import datetime
 import random
-
+import re
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service #
 from webdriver_manager.chrome import ChromeDriverManager #
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
-
-def YouTube_music(result):
-    wd = webdriver.Chrome(service =Service(ChromeDriverManager().install()))
+wd = webdriver.Chrome(service =Service(ChromeDriverManager().install()))
 
 
-    #search_name = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "reggae"]
-    #YouTube_URL = (f"https://www.youtube.com/results?search_query={search_name}")
-    keyword = 'genre song'
-
-    wd.get('https://youtube.com/');
-    time.sleep(3)
-
-    search = wd.find_element(By.NAME, "search_query")
-    time.sleep(2)
-    search.send_keys(keyword)
-    #search.send_keys(Keys.ENTER)
-
-    btnSearch = wd.find_element(By.ID, 'search-icon-legacy')
-    btnSearch.click()
-
-    print(keyword + "검색")
-    
-    html = wd.page_source
-    soupYM = BeautifulSoup(html,'html.parser')
-    
+def scroll():    
     try:        
         # 페이지 내 스크롤 높이 받아오기
         last_page_height = wd.execute_script("return document.documentElement.scrollHeight")
@@ -76,11 +56,151 @@ def YouTube_music(result):
                 last_page_height = new_page_height
     except Exception as e:
         print("에러 발생: ", e)
-                
-    s
+    
     
 
-    return
+def YouTube_music(result):
+    
+    keyword = '나비야'
+    wd.get('https://youtube.com/');
+    time.sleep(3)
+    
+    
+
+    # keyword 입력
+    search = wd.find_element(By.NAME, "search_query")
+    time.sleep(2)
+    search.send_keys(keyword) 
+    #search.send_keys(Keys.ENTER)
+    time.sleep(2)
+    # search 버튼 클릭
+    btnSearch = wd.find_element(By.ID, 'search-icon-legacy')
+    btnSearch.click()
+    print(keyword + "검색")
+    time.sleep(3)
+
+    # 검색 필터를 4k로 설정해서 shorts , 실시간 막을것
+    #sfillter = wd.find_element(By.XPATH,'//*[@id="container"]/ytd-toggle-button-renderer/a')
+    #sfillter.click()
+    #scroll()
+      
+    html = wd.page_source
+    soupYM = BeautifulSoup(html,'html.parser')
+    content_total = soupYM.find_all(class_ = 'yt-simple-endpoint style-scope ytd-video-renderer')
+    content_total_title = list(map(lambda data: data.get_text().replace("\n", ""), content_total))
+    content_total_link = list(map(lambda data: "https://youtube.com" + data["href"], content_total))
+    content_play_time = list(map(lambda data: data['aria-label'],content_total))
+
+
+
+    #for i in range(0,(len(content_play_time)-1)):
+        #content_play_time[i] = content_play_time[i].split('전')
+        #content_play_time[i] = content_play_time[i][1]
+        #content_play_time[i] = content_play_time[i].split('조회수')
+        #content_play_time[i] = content_play_time[i][0]
+        #content_play_time[i] = content_play_time[i][0].strip()
+        #print(content_play_time[i])
+    #print(content_total_title)
+
+
+    #test
+    new_content_total_time = []
+    new_content_total_title = []
+    new_content_total_link = []
+
+    print(len(content_total_title))
+
+    print(content_total_title[0])
+    print(content_play_time[0])
+    content_play_time[0] = content_play_time[0].split('전')
+    content_play_time[0] = content_play_time[0][1]
+    content_play_time[0] = content_play_time[0].split('분')
+    content_play_time[0] = content_play_time[0][0]
+    content_play_time[0] = re.sub(r'[^0-9]', '', content_play_time[0])
+    print(content_play_time[0])
+    if((int(content_play_time[0])>1) and (int(content_play_time[0])<7)):
+        new_content_total_time.append(int(content_play_time[0]))
+        new_content_total_title.append(content_total_title[0])
+        new_content_total_link.append(content_total_link[0])
+    print(new_content_total_time,new_content_total_title,new_content_total_link)
+    
+    print(content_total_title[1])
+    print(content_play_time[1])
+    content_play_time[1] = content_play_time[1].split('전')
+    content_play_time[1] = content_play_time[1][1]
+    content_play_time[1] = content_play_time[1].split('분')
+    content_play_time[1] = content_play_time[1][0]
+    content_play_time[1] = re.sub(r'[^0-9]', '', content_play_time[1])
+    print(content_play_time[1])
+    if((int(content_play_time[1])>1) and (int(content_play_time[1])<7)):
+        new_content_total_time.append(int(content_play_time[1]))
+        new_content_total_title.append(content_total_title[1])
+        new_content_total_link.append(content_total_link[1])
+    print(new_content_total_time,new_content_total_title,new_content_total_link)
+
+
+    
+    print(content_total_title[2])
+    print(content_play_time[2])
+    content_play_time[2] = content_play_time[2].split('전')
+    content_play_time[2] = content_play_time[2][1]
+    content_play_time[2] = content_play_time[2].split('분')
+    content_play_time[2] = content_play_time[2][0]
+    content_play_time[2] = re.sub(r'[^0-9]', '', content_play_time[2])
+    print(content_play_time[2])
+    if((int(content_play_time[2])>1) and (int(content_play_time[2])<7)):
+        new_content_total_time.append(int(content_play_time[2]))
+        new_content_total_title.append(content_total_title[2])
+        new_content_total_link.append(content_total_link[2])
+    print(new_content_total_time,new_content_total_title,new_content_total_link)
+
+
+
+    print(content_total_title[3])
+    print(content_play_time[3])
+    content_play_time[3] = content_play_time[3].split('전')
+    content_play_time[3] = content_play_time[3][1]
+    content_play_time[3] = content_play_time[3].split('분')
+    content_play_time[3] = content_play_time[3][0]
+    content_play_time[3] = re.sub(r'[^0-9]', '', content_play_time[3])
+    print(content_play_time[3])
+    if((int(content_play_time[3])>1) and (int(content_play_time[3])<7)):
+        new_content_total_time.append(int(content_play_time[3]))
+        new_content_total_title.append(content_total_title[3])
+        new_content_total_link.append(content_total_link[3])
+    print(new_content_total_time,new_content_total_title,new_content_total_link)
+
+
+
+    print(content_total_title[4])
+    print(content_play_time[4])
+    content_play_time[4] = content_play_time[4].split('전')
+    content_play_time[4] = content_play_time[4][1]
+    content_play_time[4] = content_play_time[4].split('분')
+    content_play_time[4] = content_play_time[4][0]
+    content_play_time[4] = re.sub(r'[^0-9]', '', content_play_time[4])
+    print(content_play_time[4])
+    if((int(content_play_time[4])>1) and (int(content_play_time[4])<7)):
+        new_content_total_time.append(int(content_play_time[4]))
+        new_content_total_title.append(content_total_title[4])
+        new_content_total_link.append(content_total_link[4])
+    print(new_content_total_time,new_content_total_title,new_content_total_link)
+
+
+    
+   
+
+    
+    
+    
+    
+
+    #새로운 ㅣ스트에 인덱스 맞춰서 제목 링크 시간 추가
+
+
+    
+    #print(len(content_total_link))
+    
 
 def main():
     result = []
