@@ -61,7 +61,7 @@ def scroll():
 
 def YouTube_music(result):
     
-    keyword = '나비야'
+    keyword ='우유송'
     wd.get('https://youtube.com/');
     time.sleep(3)
     
@@ -82,7 +82,7 @@ def YouTube_music(result):
     # 검색 필터를 4k로 설정해서 shorts , 실시간 막을것
     #sfillter = wd.find_element(By.XPATH,'//*[@id="container"]/ytd-toggle-button-renderer/a')
     #sfillter.click()
-    #scroll()
+    scroll()
       
     html = wd.page_source
     soupYM = BeautifulSoup(html,'html.parser')
@@ -92,6 +92,10 @@ def YouTube_music(result):
     content_play_time = list(map(lambda data: data['aria-label'],content_total))
 
 
+
+    new_content_total_time = []
+    new_content_total_title = []
+    new_content_total_link = []
 
     #for i in range(0,(len(content_play_time)-1)):
         #content_play_time[i] = content_play_time[i].split('전')
@@ -103,112 +107,37 @@ def YouTube_music(result):
     #print(content_total_title)
 
 
-    #test
-    new_content_total_time = []
-    new_content_total_title = []
-    new_content_total_link = []
-
-    print(len(content_total_title))
-
-    print(content_total_title[0])
-    print(content_play_time[0])
-    content_play_time[0] = content_play_time[0].split('전')
-    content_play_time[0] = content_play_time[0][1]
-    content_play_time[0] = content_play_time[0].split('분')
-    content_play_time[0] = content_play_time[0][0]
-    content_play_time[0] = re.sub(r'[^0-9]', '', content_play_time[0])
-    print(content_play_time[0])
-    if((int(content_play_time[0])>1) and (int(content_play_time[0])<7)):
-        new_content_total_time.append(int(content_play_time[0]))
-        new_content_total_title.append(content_total_title[0])
-        new_content_total_link.append(content_total_link[0])
-    print(new_content_total_time,new_content_total_title,new_content_total_link)
     
-    print(content_total_title[1])
-    print(content_play_time[1])
-    content_play_time[1] = content_play_time[1].split('전')
-    content_play_time[1] = content_play_time[1][1]
-    content_play_time[1] = content_play_time[1].split('분')
-    content_play_time[1] = content_play_time[1][0]
-    content_play_time[1] = re.sub(r'[^0-9]', '', content_play_time[1])
-    print(content_play_time[1])
-    if((int(content_play_time[1])>1) and (int(content_play_time[1])<7)):
-        new_content_total_time.append(int(content_play_time[1]))
-        new_content_total_title.append(content_total_title[1])
-        new_content_total_link.append(content_total_link[1])
-    print(new_content_total_time,new_content_total_title,new_content_total_link)
+    for i in range(0,(len(content_play_time)-1)):
+        print(content_total_title[i])
+        print(content_play_time[i])
+        content_play_time[i] = content_play_time[i].split('전')
+        content_play_time[i] = content_play_time[i][1]
+        content_play_time[i] = content_play_time[i].split('분')
+        content_play_time[i] = content_play_time[i][0]
+        content_play_time[i] = re.sub(r'[^0-9]', '', content_play_time[i])
+        print(content_play_time[i])
+        if((int(content_play_time[i])>1) and (int(content_play_time[i])<7)):
+            new_content_total_time.append(int(content_play_time[i]))
+            new_content_total_title.append(content_total_title[i])
+            new_content_total_link.append(content_total_link[i])
+            #if(len(new_content_total_title) == 51):
+                #continue
+            result.append([content_total_title[i]] + [content_total_link[i]])
+        print(new_content_total_time,new_content_total_title,new_content_total_link)
+       
 
 
     
-    print(content_total_title[2])
-    print(content_play_time[2])
-    content_play_time[2] = content_play_time[2].split('전')
-    content_play_time[2] = content_play_time[2][1]
-    content_play_time[2] = content_play_time[2].split('분')
-    content_play_time[2] = content_play_time[2][0]
-    content_play_time[2] = re.sub(r'[^0-9]', '', content_play_time[2])
-    print(content_play_time[2])
-    if((int(content_play_time[2])>1) and (int(content_play_time[2])<7)):
-        new_content_total_time.append(int(content_play_time[2]))
-        new_content_total_title.append(content_total_title[2])
-        new_content_total_link.append(content_total_link[2])
-    print(new_content_total_time,new_content_total_title,new_content_total_link)
 
-
-
-    print(content_total_title[3])
-    print(content_play_time[3])
-    content_play_time[3] = content_play_time[3].split('전')
-    content_play_time[3] = content_play_time[3][1]
-    content_play_time[3] = content_play_time[3].split('분')
-    content_play_time[3] = content_play_time[3][0]
-    content_play_time[3] = re.sub(r'[^0-9]', '', content_play_time[3])
-    print(content_play_time[3])
-    if((int(content_play_time[3])>1) and (int(content_play_time[3])<7)):
-        new_content_total_time.append(int(content_play_time[3]))
-        new_content_total_title.append(content_total_title[3])
-        new_content_total_link.append(content_total_link[3])
-    print(new_content_total_time,new_content_total_title,new_content_total_link)
-
-
-
-    print(content_total_title[4])
-    print(content_play_time[4])
-    content_play_time[4] = content_play_time[4].split('전')
-    content_play_time[4] = content_play_time[4][1]
-    content_play_time[4] = content_play_time[4].split('분')
-    content_play_time[4] = content_play_time[4][0]
-    content_play_time[4] = re.sub(r'[^0-9]', '', content_play_time[4])
-    print(content_play_time[4])
-    if((int(content_play_time[4])>1) and (int(content_play_time[4])<7)):
-        new_content_total_time.append(int(content_play_time[4]))
-        new_content_total_title.append(content_total_title[4])
-        new_content_total_link.append(content_total_link[4])
-    print(new_content_total_time,new_content_total_title,new_content_total_link)
-
-
-    
-   
-
-    
-    
-    
-    
-
-    #새로운 ㅣ스트에 인덱스 맞춰서 제목 링크 시간 추가
-
-
-    
-    #print(len(content_total_link))
-    
 
 def main():
     result = []
     print("YouTubeMusic crawling >>>>>>>>>>>>>>>>>>>>")
     YouTube_music(result)
 
-    #CB_tbl = pd.DataFrame(result,columns=('store','address','phone'))
-    #CB_tbl.to_csv('./CoffeeBean.csv',encoding='utf-8',mode='w',index=True)
+    CB_tbl = pd.DataFrame(result,columns=('title','link'))
+    CB_tbl.to_csv('./YoutubeMusic.csv',encoding='utf-8',mode='w',index=True)
 
 if __name__ == '__main__':
     main()
