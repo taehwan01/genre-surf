@@ -24,7 +24,6 @@ from selenium.webdriver.chrome.service import Service #
 from webdriver_manager.chrome import ChromeDriverManager #
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 
 wd = webdriver.Chrome(service =Service(ChromeDriverManager().install()))
@@ -61,7 +60,7 @@ def scroll():
 
 def YouTube_music(result):
     
-    keyword ='우유송'
+    keyword ='blues'
     wd.get('https://youtube.com/');
     time.sleep(3)
     
@@ -92,6 +91,7 @@ def YouTube_music(result):
     content_play_time = list(map(lambda data: data['aria-label'],content_total))
 
 
+    add_btn = soupYM.find_all(class_ = 'dropdown-trigger style-scope ytd-menu-renderer')
 
     new_content_total_time = []
     new_content_total_title = []
