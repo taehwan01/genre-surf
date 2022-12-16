@@ -1,0 +1,50 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: white;
+  background-color: #3e5454;
+  font-family: 'hiragino';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+  text-shadow: 0 0 2.5px white;
+  /* margin: 0 0 1rem 0; */
+}
+h3 {
+  font-size: 2rem;
+  text-shadow: 0 0 2.5px white;
+  /* margin: 1rem 0 1rem 0; */
+}
+
+.file-button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  text-shadow: 0 0 2.5px white;
+  border: solid 1px white;
+  box-shadow: 0 0 5px white;
+  border-radius: 1rem;
+  margin: 0 0 1rem 0;
+}
+.ytb-button {
+  padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+  font-size: 2rem;
+  text-shadow: 0 0 2.5px white;
+  border: solid 1px white;
+  box-shadow: 0 0 5px white;
+  border-radius: 1rem;
+  margin: 0 0 1rem 0;
+}
+
+#input-file,
+#ytb-button {
+  display: none;
+}
