@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const pd = require('node-pandas-js');
+const cors = require('cors');
+
+app.use(cors());
 
 app.get('/', (request, response) => {
   response.send('Executed genre-surf server');
