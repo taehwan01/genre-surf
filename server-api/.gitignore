@@ -1,0 +1,8 @@
+# .gitignore
+
+package-lock.json
+/node_modules
+
+*/Data
+*/__pycache__
+FreeFall.wav
