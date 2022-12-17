@@ -1,8 +1,16 @@
 import { useState } from 'react';
+import axios from 'axios';
 import '../css/Main.css';
 
 function Main() {
   let [genre, setGenre] = useState('undefined');
+
+  const getGenre = () => {
+    console.log('Execute getGenre');
+    axios.get('http://localhost:8080/get-genre').then((response) => {
+      console(response);
+    });
+  };
 
   const youtubeButton = () => {
     window.open('https://www.youtube.com/', '_blank');
@@ -17,7 +25,9 @@ function Main() {
         </label>
         <input type='file' id='input-file' />
         <br />
-        <button className='search-button'>What is the genre?</button>
+        <button className='search-button' onClick={getGenre}>
+          What is the genre?
+        </button>
         <h3>
           Your audio file's genre is:&nbsp;
           <u>&nbsp;&nbsp;</u>
