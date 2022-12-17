@@ -16,35 +16,68 @@ body {
 
 h1 {
   font-size: 3.5rem;
-  text-shadow: 0 0 2.5px white;
+  text-shadow: 0 0 3.5px white;
   /* margin: 0 0 1rem 0; */
 }
 h3 {
   font-size: 2rem;
   text-shadow: 0 0 2.5px white;
-  /* margin: 1rem 0 1rem 0; */
+  margin: 10px 0 10px 0;
+}
+
+.box-content {
+  border: solid 3px white;
+  border-radius: 1rem;
+  padding: 5rem 3rem 8rem 3rem;
+  box-shadow: 0 0 10px white;
 }
 
 .file-button {
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
   font-size: 2rem;
   text-shadow: 0 0 2.5px white;
-  border: solid 1px white;
+  border: solid 2px white;
   box-shadow: 0 0 5px white;
   border-radius: 1rem;
-  margin: 0 0 1rem 0;
+  margin: 0 0 10px 0;
+  transition-duration: 0.3s;
 }
-.ytb-button {
-  padding: 0.5rem 1.3rem 0.5rem 1.3rem;
-  font-size: 2rem;
-  text-shadow: 0 0 2.5px white;
-  border: solid 1px white;
-  box-shadow: 0 0 5px white;
-  border-radius: 1rem;
-  margin: 0 0 1rem 0;
+.file-button:hover {
+  box-shadow: 0 0 15px white;
 }
 
-#input-file,
-#ytb-button {
+.search-button {
+  padding: 0.57rem 1rem;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 0 2.5px white;
+  border: solid 2px white;
+  box-shadow: 0 0 5px white;
+  background-color: transparent;
+  border-radius: 1rem;
+  margin: 30px 0 10px 0;
+  transition-duration: 0.3s;
+}
+.search-button:hover {
+  box-shadow: 0 0 15px white;
+}
+
+.ytb-button {
+  padding: 0.57rem 2.56rem;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 0 2.5px white;
+  border: solid 2px white;
+  box-shadow: 0 0 5px white;
+  background-color: transparent;
+  border-radius: 1rem;
+  margin: 10px 0 10px 0;
+  transition-duration: 0.3s;
+}
+.ytb-button:hover {
+  box-shadow: 0 0 15px white;
+}
+
+#input-file {
   display: none;
 }

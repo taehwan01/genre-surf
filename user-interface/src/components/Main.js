@@ -1,24 +1,33 @@
+import { useState } from 'react';
 import '../css/Main.css';
 
 function Main() {
+  let [genre, setGenre] = useState('undefined');
+
   const youtubeButton = () => {
     window.open('https://www.youtube.com/', '_blank');
   };
 
   return (
-    <div class='main'>
-      <h1>Genre Surf</h1>
-      <label class='file-button' htmlFor='input-file'>
-        Upload Audio File
-      </label>
-      <input type='file' id='input-file' />
-      <h3>Your audio file's genre is: </h3>
-      <label class='ytb-button' htmlFor='ytb-button'>
-        Surf In Youtube
-      </label>
-      <button id='ytb-button' onClick={youtubeButton}>
-        <h3>Surf In Youtube</h3>
-      </button>
+    <div className='main'>
+      <div className='box-content'>
+        <h1>Genre Surf</h1>
+        <label className='file-button' htmlFor='input-file'>
+          Upload Audio File
+        </label>
+        <input type='file' id='input-file' />
+        <br />
+        <button className='search-button'>What is the genre?</button>
+        <h3>
+          Your audio file's genre is:&nbsp;
+          <u>&nbsp;&nbsp;</u>
+          <u>{genre}</u>
+          <u>&nbsp;&nbsp;</u>
+        </h3>
+        <button className='ytb-button' onClick={youtubeButton}>
+          Surf In Youtube
+        </button>
+      </div>
     </div>
   );
 }
