@@ -3,12 +3,13 @@ import axios from 'axios';
 import '../css/Main.css';
 
 function Main() {
-  let [genre, setGenre] = useState('undefined');
+  let [genre, setGenre] = useState('\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0');
 
   const getGenre = () => {
     console.log('Execute getGenre');
     axios.get('http://localhost:8080/get-genre')
       .then((response) => {
+        setGenre(response.data)
         console.log(response)
       });
   }
