@@ -2,23 +2,33 @@ const express = require('express');
 const app = express();
 const pd = require('node-pandas-js');
 const cors = require('cors');
+const multer = require('multer');
 
 app.use(cors());
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, 'uploads/');
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 app.get('/', (request, response) => {
   response.send('Executed genre-surf server');
 });
 
-app.get('/get-genre', (request, response) => {
+app.post('/get-genre', upload.single('file'), (request, response) => {
   console.log('Client called /get-genre...\n');
 
-  const spawn = require('child_process').spawn;
-  // const inputFile = 'python-files/Data/genres_original/pop/pop.00015.wav'
-  // 테스트용으로 wav파일 하나 입력
-  // TODO: 사용자 파일 입력으로 수정할 것
-  const inputFile = 'FreeFall.wav';
+  const fileInput = request.file.path;
+  console.log('File name from client: ', fileInput);
 
-  const extractAudioFeatures = spawn('python3', ['python-files/audioFeat.py', inputFile]);
+  const spawn = require('child_process').spawn;
+  console.log('Extracting genre...\n');
+  const extractAudioFeatures = spawn('python3', ['python-files/audioFeat.py', fileInput]);
   console.log('- - - - - Called audioFeat.py - - - - -\n');
   extractAudioFeatures.stdout.on('data', (audioFeatResult) => {
     const audioFeatures = audioFeatResult.toString();
@@ -34,7 +44,6 @@ app.get('/get-genre', (request, response) => {
 
       response.send(genre);
     });
-    // response.send('Executed audioFeat.py successfully')
   });
 });
 
