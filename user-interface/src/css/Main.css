@@ -28,18 +28,20 @@ h3 {
 .box-content {
   border: solid 3px white;
   border-radius: 1rem;
-  padding: 5rem 3rem 8rem 3rem;
+  padding: 4rem 3rem 8rem 3rem;
   box-shadow: 0 0 10px white;
 }
 
 .file-button {
-  padding: 0.5rem 2rem;
+  padding: 0.57rem 1.2rem;
   font-size: 2rem;
+  color: white;
   text-shadow: 0 0 2.5px white;
   border: solid 2px white;
   box-shadow: 0 0 5px white;
+  background-color: transparent;
   border-radius: 1rem;
-  margin: 0 0 10px 0;
+  margin: 30px 0 10px 0;
   transition-duration: 0.3s;
 }
 .file-button:hover {
@@ -78,6 +80,6 @@ h3 {
   box-shadow: 0 0 15px white;
 }
 
-#input-file {
+/* #input-file {
   display: none;
-}
+} */
