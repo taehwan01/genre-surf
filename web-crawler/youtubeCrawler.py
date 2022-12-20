@@ -70,16 +70,6 @@ def YouTube_music():
 
 
     add_btn = []
-
-    # 전체 컨텐츠 
-    #content_total = soupYM.find_all(class_ = 'style-scope ytd-thumbnail-overlay-time-status-renderer')
-    #content_total_time = soupYM.find_all(class_ = 'ytp-time-duration').text
-    #content_total = list(map(lambda data: data.get_text().replace("\n", ""), content_total))
-
-    #content_play_time = list(map(lambda data: data.get_text().replace("\n", ""), content_total))
-    #content_play_time = content_play_time[1::2]
-    #content_play_time[i] = content_play_time[i].strip()
-    #print(content_play_time)
             
     i = 0
     total_hour = 0
@@ -104,8 +94,8 @@ def YouTube_music():
         content_time = datetime.strptime(content_time,"%H:%M:%S")
         total_hour = total_hour + content_time.hour
         total_minute = total_minute + content_time.minute
-        print(total_hour)
-        print(total_minute)
+        #print(total_hour)
+        #print(total_minute)
 
         if(total_minute > 60 or total_minute == 60):
             total_minute = total_minute - 60
@@ -125,52 +115,6 @@ def YouTube_music():
         
 
     print("크롤링 종료")
-
-        #unfold_btn = wd.find_element(By.XPATH, '/html/body/ytd-app/ytd-miniplayer/div[2]/div/div[1]/div[2]/div[2]/yt-icon-button/button')
-        #unfold_btn.click()
-        #time.sleep(3)
-
-        #fold_btn = wd.find_element(By.XPATH, '/html/body/ytd-app/ytd-miniplayer/div[2]/div/div[1]/div[2]/div[2]/yt-icon-button/button')
-        #fold_btn.click()
-        #time.sleep(3)
-
-
-            
-#    content_total = soupYM.find_all(class_ = 'yt-simple-endpoint style-scope ytd-video-renderer')
-#    content_total_title = list(map(lambda data: data.get_text().replace("\n", ""), content_total))
-#    content_total_link = list(map(lambda data: "https://youtube.com" + data["href"], content_total))
-#    content_play_time = list(map(lambda data: data['aria-label'],content_total))
-#    new_content_total_time = []
-#   new_content_total_title = []
-#    new_content_total_link = []
-#    for i in range(0,(len(content_play_time)-1)):
-#        print(content_total_title[i])
-#        print(content_play_time[i])
-#        content_play_time[i] = content_play_time[i].split('전')
-#        content_play_time[i] = content_play_time[i][1]
-#       content_play_time[i] = content_play_time[i].split('분')
-#        content_play_time[i] = content_play_time[i][0]
-#        content_play_time[i] = re.sub(r'[^0-9]', '', content_play_time[i])
-#        print(content_play_time[i])
-#        if((int(content_play_time[i])>1) and (int(content_play_time[i])<7)):
-#           new_content_total_time.append(int(content_play_time[i]))
-#            new_content_total_title.append(content_total_title[i])
-#            new_content_total_link.append(content_total_link[i])
-            #if(len(new_content_total_title) == 51):
-                #continue
-#            result.append([content_total_title[i]] + [content_total_link[i]])
-#        print(new_content_total_time,new_content_total_title,new_content_total_link)
-       
-
-
-    
-        #unfold_btn = wd.find_element(By.XPATH, '/html/body/ytd-app/ytd-miniplayer/div[2]/div/div[1]/div[2]/div[2]/yt-icon-button/button')
-        #unfold_btn.click()
-        #time.sleep(3)
-        #fold_btn = wd.find_element(By.XPATH, '/html/body/ytd-app/ytd-miniplayer/div[2]/div/div[1]/div[2]/div[2]/yt-icon-button/button')
-        #fold_btn.click()
-        #time.sleep(3)
-
         
     
 def main():
