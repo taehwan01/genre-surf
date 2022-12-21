@@ -24,7 +24,7 @@ h3 {
   color: white;
 }
 
-.loading{
+.loading {
   transition-duration: 0.3s;
   filter: blur(0.2rem);
 }
@@ -36,7 +36,7 @@ h3 {
   box-shadow: 0 0 10px white;
 }
 
-.file-button{
+.file-button {
   display: inline-block;
   padding: 0.9rem 2.5rem;
   border: solid 2px white;
@@ -46,13 +46,14 @@ h3 {
   border-radius: 1rem;
   transition-duration: 0.3s;
 }
-.file-button:hover{
+.file-button:hover {
   text-shadow: 0 0 4px white;
   box-shadow: 0 0 15px white;
   cursor: pointer;
 }
 
-.get-genre-button, .ytb-button {
+.get-genre-button,
+.ytb-button {
   text-shadow: 0 0 2.5px white;
   border: solid 2px white;
   box-shadow: 0 0 5px white;
@@ -60,19 +61,20 @@ h3 {
   border-radius: 1rem;
   transition-duration: 0.3s;
 }
-.get-genre-button:hover, .ytb-button:hover {
+.get-genre-button:hover,
+.ytb-button:hover {
   text-shadow: 0 0 4px white;
   box-shadow: 0 0 15px white;
   cursor: pointer;
 }
-.get-genre-button{
+.get-genre-button {
   padding: 1rem 2rem;
 }
-.ytb-button{
+.ytb-button {
   padding: 1rem 3rem;
 }
 
-.genre{
+.genre {
   text-shadow: 0 0 2.5px white;
   margin: 3rem 0;
 }
