@@ -38,12 +38,25 @@ app.post('/get-genre', upload.single('file'), (request, response) => {
     const predictGenre = spawn('python3', ['python-files/predictGenre.py', audioFeatures]);
     console.log('- - - - - Called predictGenre.py - - - - -');
     predictGenre.stdout.on('data', (genreResult) => {
-      genre = genreResult.toString();
+      const genre = genreResult.toString();
       console.log('Genre: ', genre);
       console.log('- - - - - Executed predictGenre.py successfully - - - - -\n');
 
       response.send(genre);
     });
+  });
+});
+
+app.get('/surf-youtube', (request, response) => {
+  const genre = request.query.genre;
+  const spawn = require('child_process').spawn;
+  console.log('\nClient called /surf-youtube...\n');
+  console.log(`Search ${genre} genre song Youtube\n`);
+  const webCrawler = spawn('python3', ['python-files/youtubeCrawler.py', genre]);
+  console.log('- - - - - Called youtubeCrawler.py - - - - -');
+  webCrawler.stdout.on('data', (resultMessage) => {
+    console.log(resultMessage.toString());
+    response.send(resultMessage.toString());
   });
 });
 

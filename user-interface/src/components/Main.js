@@ -43,7 +43,10 @@ function Main() {
   };
 
   const youtubeButton = () => {
-    window.open('https://www.youtube.com/', '_blank');
+    console.log(`Search ${genre} on Youtube`);
+    apiClient.get('/surf-youtube', { params: { genre: genre } }).then((response) => {
+      console.log(response.data);
+    });
   };
 
   return (
