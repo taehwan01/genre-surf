@@ -4,9 +4,9 @@ import '../css/Main.css';
 // import { upload } from '@testing-library/user-event/dist/upload';
 
 function Main() {
-  let [genre, setGenre] = useState(
-    '\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0',
-  );
+  let [genre, setGenre] = useState('');
+  let [audioFileName, setAudioFileName] = useState('');
+  let [wait, setWait] = useState(false);
 
   const apiClient = axios.create({
     baseURL: 'http://localhost:8080',
@@ -16,6 +16,7 @@ function Main() {
     console.log('upload file and get genre.');
     try {
       const { data } = await apiClient.post('/get-genre', file).then((response) => {
+        setWait(false);
         setGenre(response.data);
         console.log(response);
       });
@@ -26,12 +27,19 @@ function Main() {
   };
 
   const upload = async (event) => {
-    console.log('file: ', event.target.file);
+    setWait(true);
+    setGenre('Loading...');
     event.preventDefault();
+    setAudioFileName(event.target.file.files[0].name);
     console.log('files[0]: ', event.target.file.files[0]);
     const formData = new FormData();
     formData.append('file', event.target.file.files[0]);
     await uploadFile(formData);
+  };
+
+  const changeFile = async (event) => {
+    setGenre('');
+    setAudioFileName(event.target.files[0].name);
   };
 
   const youtubeButton = () => {
@@ -39,24 +47,41 @@ function Main() {
   };
 
   return (
-    <div className='main'>
-      <div className='box-content'>
-        <h1>Genre Surf</h1>
-        <form encType='multipart/form-data' onSubmit={upload}>
-          <input type='file' name='file' id='input-file' />
-          <button type='submit' className='file-button'>
-            Get genre !
+    <div>
+      <div className='main'>
+        <div className='box-content'>
+          <h1 className={`${wait ? 'loading' : ''}`}>Genre Surf</h1>
+          <form encType='multipart/form-data' onSubmit={upload}>
+            <label className={`file-button ${wait ? 'loading' : ''}`} htmlFor='input-file'>
+              <h3>Upload Audio File</h3>
+            </label>
+            <input type='file' name='file' id='input-file' onChange={changeFile} />
+            {audioFileName ? (
+              <div>
+                <h3 className='genre'>
+                  <span className={`${wait ? 'loading' : ''}`}>
+                    {audioFileName}'s genre is:&nbsp;
+                  </span>
+                  {genre ? (
+                    <u>&nbsp;&nbsp;{genre}&nbsp;&nbsp;</u>
+                  ) : (
+                    <button type='submit' className='get-genre-button'>
+                      <h3>Get Genre !</h3>
+                    </button>
+                  )}
+                </h3>
+              </div>
+            ) : (
+              <div>
+                <br />
+                <br />
+              </div>
+            )}
+          </form>
+          <button className={`ytb-button ${wait ? 'loading' : ''}`} onClick={youtubeButton}>
+            <h3>Surf In Youtube</h3>
           </button>
-        </form>
-        <h3>
-          Your audio file's genre is:&nbsp;
-          <u>&nbsp;&nbsp;</u>
-          <u>{genre}</u>
-          <u>&nbsp;&nbsp;</u>
-        </h3>
-        <button className='ytb-button' onClick={youtubeButton}>
-          Surf In Youtube
-        </button>
+        </div>
       </div>
     </div>
   );

@@ -27,16 +27,16 @@ app.post('/get-genre', upload.single('file'), (request, response) => {
   console.log('File name from client: ', fileInput);
 
   const spawn = require('child_process').spawn;
-  console.log('Extracting genre...\n');
+  console.log('\nExtracting genre...\n');
   const extractAudioFeatures = spawn('python3', ['python-files/audioFeat.py', fileInput]);
-  console.log('- - - - - Called audioFeat.py - - - - -\n');
+  console.log('- - - - - Called audioFeat.py - - - - -');
   extractAudioFeatures.stdout.on('data', (audioFeatResult) => {
     const audioFeatures = audioFeatResult.toString();
     console.log('Audio features: \n', audioFeatures);
     console.log('- - - - - Executed audioFeat.py successfully - - - - -\n');
 
     const predictGenre = spawn('python3', ['python-files/predictGenre.py', audioFeatures]);
-    console.log('- - - - - Called predictGenre.py - - - - -\n');
+    console.log('- - - - - Called predictGenre.py - - - - -');
     predictGenre.stdout.on('data', (genreResult) => {
       genre = genreResult.toString();
       console.log('Genre: ', genre);
